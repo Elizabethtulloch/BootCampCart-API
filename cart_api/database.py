@@ -11,6 +11,7 @@ from playhouse.postgres_ext import (
     CharField,
     DoubleField,
     BooleanField,
+    IntegerField
 )
 
 database = os.environ.get("POSTGRES_DB", "bootcamp")
@@ -27,6 +28,12 @@ class BaseModel(Model):
         database = PostgresqlDatabase(
             database, user=user, password=password, host=hostname, autorollback=True
         )
+
+class DatabaseCartItem(BaseModel):
+    id = AutoField(primary_key=True)
+    name = CharField()
+    price = DoubleField()
+    quantity  = IntegerField()
 
 
 class DatabaseProducts(BaseModel):
